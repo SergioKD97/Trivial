@@ -9,19 +9,19 @@
         <link href="js/jquery.raty.css" rel="stylesheet" type="text/css"/>
         <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         
-	<title>TRIVIAL</title>
+	<title>LOGIN</title>
 
         
         <style>
             body{background-image: url("images/dados.jpg") ;background-size: cover;font-size: 1em;font-family: arial; margin-right: 100px}
-            
+            .inputLogin{border-radius:8px;width: 100%;height: 25px;font-size: 12px }
             
             
         </style>
 </head>
 <body>
 	<center><div ><h2 style="color: #0000FF; ">Inicio de sesión</h2>
-		<center><div class="Ingreso">
+		<center><div>
 
 	<table border="0" align="center" valign="middle">
 	    <tr>
@@ -29,14 +29,19 @@
                     <form action="validar.php" method="post">
 
                     <table border="0">
-
-                    <tr><td><label style="font-size: 14pt"><b>Correo: </b></label></td>
-                            <td width=80> <input class="form-group has-success" style="border-radius:15px;" type="text" name="mail"></td></tr>
-                    <tr><td><label style="font-size: 14pt"><b>Contraseña: </b></label></td>
-                            <td witdh=80><input style="border-radius:15px;" type="password" name="pass"></td></tr>
-                    <tr><td></td>
-                            <td width=80 align=center><input class="btn btn-primary" type="submit" value="Aceptar"></td>
-                            </tr></tr></table>
+                        <tr>
+                            <td><label style="font-size: 12pt;"><b>Usuario: </b></label></td>
+                            <td width=150> <input class="inputLogin form-group has-success" type="text" name="usuario" required ="Ingresa Usuario"></td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top: 12px"><label style="font-size: 12pt"><b>Contraseña: </b></label></td>
+                            <td witdh=150><input class="inputLogin" type="password" name="pass" required="Ingresa Contraseña"></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td width=150 align=right><input class="btn btn-primary" type="submit" value="Aceptar"></td>
+                        </tr>
+                    </table>
                     </form>
 <br>
 <!-- formulario registro -->
@@ -45,7 +50,7 @@
                       <fieldset>
                         <legend  style="font-size: 18pt"><b>Registro</b></legend>
                         <div class="form-group">
-                          <label style="font-size: 14pt"><b>Ingresa tu nombre</b></label>
+                          <label style="font-size: 14pt"><b>Ingresa tu Usuario</b></label>
                           <input type="text" name="realname" class="form-control" placeholder="Ingresa tu nombre" />
                         </div>
                         <div class="form-group">

@@ -16,7 +16,7 @@
 				
 				//require("connect_db.php");
 //la variable  $mysqli viene de connect_db que lo traigo con el require("connect_db.php");
-				mysqli_query($mysqli,"INSERT INTO usuarios VALUES($realname','$pass','$mail')");
+				mysqli_query($mysqli,"INSERT INTO usuarios VALUES('$realname','$pass','$mail')");
 				//echo 'Se ha registrado con exito';
 				echo ' <script language="javascript">alert("Usuario registrado con éxito");</script> ';
 				
