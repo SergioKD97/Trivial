@@ -12,30 +12,116 @@ and open the template in the editor.
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="js/jquery.raty.css" rel="stylesheet" type="text/css"/>
         <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+        
+        <script src="js/jquery.js" type="text/javascript"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="js/jquery.raty.js" type="text/javascript"></script>        
         
         <style>
+            #cabecera{}
+            .black{background-color: black;height: 2px;width: 100%;margin-top: 5px;margin-bottom: 5px}
+            .divDerecha{background-color: #FDC;padding-left: 0px; }
+            .miniboton{width: 60px;min-width: 60px;height: 60px;min-height: 60px;}
+            #niveles{ }
+            #name{margin-bottom: 10px}
+            
+            
+            body {
+            //background: linear-gradient(670deg,#a9dfbf,#f9e79f  );
+            animation: BackgroundGradient 30s infinite alternate;
+
+            }    
+                
+            @keyframes BackgroundGradient{
+                0% {background-color : #feffcd;}
+                20% {background-color : #fae5d3;}
+                40% {background-color : #edbb99;}
+                60% {background-color : #d4e6f1;}
+                80% {background-color : #d4efdf;}
+                100% {background-color : #d98880;}
+
+
+            }
+       
+               
+            
             
             
         </style>
     </head>
     <body>
-        <script>alert("BIENVENIDO")</script>                        
+        <!--<script>alert("BIENVENIDO")</script> -->                  
         
-        <div>
+        <div class="container">
+            <div id="cabecera" style="width: 50%"><div class="text-center" style="font-size: 4.5vw"> <i class="fa fa-book" ></i> TEMAS <i class="fa fa-book" ></i></div>
+                <div style="width: 96%"><hr style="border-top: 5px solid #FDC; margin-bottom: 15px;margin-top: 15px;"></div></div>
+                <div class="row">
+                    <div class="col-xs-6" > 
+
+                        <div id="aparece" class="btn btn-primary btn-lg btn-block" onclick="Niveles()">HISTORIA</div>
+                        <div id="aparece" class="btn btn-success btn-lg btn-block" onclick="Niveles()">ECONOMIA</div>
+                        <div id="aparece" class="btn btn-danger btn-lg btn-block" onclick="Niveles()">FILOSOFIA</div>
+                        <div id="aparece" class="btn btn-warning btn-lg btn-block" onclick="Niveles()">LENGUA Y LITERATURA</div>
+                        <div id="aparece" class="btn btn-info btn-lg btn-block" onclick="Niveles()">INGLES</div>
+
+                        <br>
+                    </div>
+
+
+                    <div id="derecha" class="divDerecha">
+                        <div id="name" class="btn btn-primary btn-lg">NIVELES</div>
+                        <div id="niveles" > </div>
+
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
             
-            <div> 
-
-            </div>
-
-            <div>
-
-
-            </div>
+                
+        
+            
         
         </div>
         
         
         
+    <script>
+    $('#derecha').hide();
+    $('#niveles').hide();
+    $('#name').hide();
+    temas();
+    
+    
+    function temas() {
+    
+        for (var i=1; i<10; i++){
+        $('#niveles').append('<div class="miniboton btn-group" style="margin-right: 5px;margin-top:5px"> <button style="font-size:20px" class="miniboton btn btn-large btn-primary" onclick="paco()"> '+i+'</button></div>');
+                if (i==3 || i==6) {
+                $('#niveles').append('<br>');
+            }
+        }        
+        
+    }  
+    
+    
+    
+    
+    function Niveles() {
+        $('#derecha').show();
+        $('#name').fadeIn(1000).show();
+        $('#niveles').fadeIn(1000).hide().fadeIn(1000).show();
+                                        
+    }
+                 
+    function paco() {
+    location.href = 'Preguntas.html';
+}        
+            
+            
+            
+        </script>
         
     </body>
 </html>
