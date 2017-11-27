@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,15 +52,15 @@
                         <legend  style="font-size: 18pt"><b>Registro</b></legend>
                         <div class="form-group">
                           <label style="font-size: 14pt"><b>Ingresa tu Usuario</b></label>
-                          <input type="text" name="realname" class="form-control" placeholder="Ingresa tu nombre" />
+                          <input type="text" name="realname" class="form-control" required placeholder="Ingresa tu nombre" />
                         </div>
                         <div class="form-group">
-                          <label style="font-size: 14pt; color: #FFFFFF;"><b>Ingresa tu email</b></label>
-                          <input type="text" name="nick" class="form-control"  required placeholder="Ingresa mail"/>
+                          <label style="font-size: 14pt; "><b>Ingresa tu email</b></label>
+                          <input type="text" name="nick" class="form-control"  placeholder="Ingresa mail"/>
                         </div>
                         <div class="form-group">
-                          <label style="font-size: 14pt; color: #FFFFFF;"><b>Ingresa tu Contraseña</b></label>
-                          <input type="password" name="pass" class="form-control"  placeholder="Ingresa contraseña" />
+                          <label style="font-size: 14pt;"><b>Ingresa tu Contraseña</b></label>
+                          <input type="password" name="pass" class="form-control"  required placeholder="Ingresa contraseña" />
                         </div>
                         <div class="form-group">
                           <label style="font-size: 14pt"><b>Repite tu contraseña</b></label>

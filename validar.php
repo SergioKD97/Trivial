@@ -12,7 +12,7 @@ session_start();
 	$pass=$_POST['pass'];
         
 	//la variable  $mysqli viene de connect_db que lo traigo con el require("connect_db.php");
-	$sql=mysqli_query($mysqli,"SELECT * FROM usuarios WHERE nombre='$username'");
+	$sql=mysqli_query($mysqli,"SELECT * FROM usuarios WHERE usuario='$username'");
 	$sq2=mysqli_query($mysqli,"SELECT * FROM usuarios WHERE password='$pass'");
         
 
@@ -24,7 +24,8 @@ session_start();
                     
                 
             } else {
-                echo 'Contraseña error';
+                echo '<script>alert("CONTRASEÑA INCORRECTA")</script> ';
+                echo "<script>location.href='index.php'</script>";
             }            
                     
         }else{

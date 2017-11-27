@@ -21,12 +21,44 @@ and open the template in the editor.
         <style>
             #cabecera{}
             .black{background-color: black;height: 2px;width: 100%;margin-top: 5px;margin-bottom: 5px}
-            .divDerecha{background-color: #FDC;padding-left: 0px; }
+            .divDerecha{padding-left: 0px; }
             .miniboton{width: 60px;min-width: 60px;height: 60px;min-height: 60px;}
             #niveles{ }
             #name{margin-bottom: 10px}
+            #progreso{}
+            #corazones{float: right;}
+            #separa{
+                display:block;
+                border-top:2px solid #000;
+                width:50%;
+                float: left;
+                margin-top: 6px;
+                margin-bottom: 15px;
+                border-color:#b23836;
+                -webkit-animation: thread2 12s infinite;
+                -moz-animation:    thread2 12s infinite;
+                -o-animation:      thread2 12s infinite;
+                animation:         thread2 12s infinite;	
+            }
+            #separa1{
+                display:block;
+                border-top:2px solid #000;
+                width:50%;
+                
+                margin-top: 6px;
+                margin-bottom: 15px;
+                border-color:#b23836;
+                -webkit-animation: thread1 12s infinite;
+                -moz-animation:    thread1 12s infinite;
+                -o-animation:      thread1 12s infinite;
+                animation:         thread1 12s infinite;	
+            }
+            @-webkit-keyframes thread2 {50% { width: 50%; }80% { width: 0px;}}
+            @-webkit-keyframes thread1 {50% { width: 50%; }80% { width: 0px;}}
             
             
+            
+            #preguntas{margin-top: 20px }
             body {
             animation: BackgroundGradient 30s infinite alternate;
             }    
@@ -41,11 +73,7 @@ and open the template in the editor.
 
 
             }
-       
-               
-            
-            
-            
+
         </style>
     </head>
     <body>
@@ -53,37 +81,62 @@ and open the template in the editor.
         
         <div class="container">
             <div id="cabecera" style="width: 50%"><div class="text-center" style="font-size: 4.5vw"> <i class="fa fa-book" ></i> TEMAS <i class="fa fa-book" ></i></div>
-                <div style="width: 96%"><hr style="border-top: 5px solid #FDC; margin-bottom: 15px;margin-top: 15px;"></div></div>
-                <div class="row">
-                    <div class="col-xs-6" > 
+            <div style="width: 96%"><hr style="border-top: 5px solid #FDC; margin-bottom: 15px;margin-top: 15px;"></div></div>
+            
+            <div class="row">
+                <div class="col-xs-6" > 
 
-                        <div id="aparece" class="btn btn-primary btn-lg btn-block" onclick="Niveles()">HISTORIA</div>
-                        <div id="aparece" class="btn btn-success btn-lg btn-block" onclick="Niveles()">ECONOMIA</div>
-                        <div id="aparece" class="btn btn-danger btn-lg btn-block" onclick="Niveles()">FILOSOFIA</div>
-                        <div id="aparece" class="btn btn-warning btn-lg btn-block" onclick="Niveles()">LENGUA Y LITERATURA</div>
-                        <div id="aparece" class="btn btn-info btn-lg btn-block" onclick="Niveles()">INGLES</div>
+                    <div id="aparece" class="btn btn-primary btn-lg btn-block" onclick="Niveles()">HISTORIA</div>
+                    <div id="aparece" class="btn btn-success btn-lg btn-block" onclick="Niveles()">ECONOMIA</div>
+                    <div id="aparece" class="btn btn-danger btn-lg btn-block" onclick="Niveles()">FILOSOFIA</div>
+                    <div id="aparece" class="btn btn-warning btn-lg btn-block" onclick="Niveles()">LENGUA Y LITERATURA</div>
+                    <div id="aparece" class="btn btn-info btn-lg btn-block" onclick="Niveles()">INGLES</div>
 
-                        <br>
-                    </div>
-
-
-                    <div id="derecha" class="divDerecha">
-                        <div id="name" class="btn btn-primary btn-lg">NIVELES</div>
-                        <div id="niveles" > </div>
-
-                    </div>
-                    <div>
-                        
-                    </div>
+                    <br>
                 </div>
-            
+
+
+                <div id="derecha" class="divDerecha">
+                    <div id="name" class="btn btn-primary btn-lg">NIVELES</div>
+                    <div id="niveles" > </div>
+
+                </div>
+                <div>
+
+                </div>
+            </div>
                 
-        
-            
-        
+            <div class="col-xs-2"></div>
+            <div class="row col-xs-8">
+
+                <div class="col-xs-12" id="progreso"  >
+                    
+                    <div id="puntuacion" class="btn btn-primary btn-lg " onclick="Niveles()">PUNTUACION</div>
+                    <div id="corazones" class="btn btn-success btn-lg " onclick="Niveles()">CORAZONES</div>
+
+
+                    
+                </div>
+
+                <div>    <div id="separa" class=" "></div></div>
+                <div>    <div id="separa1" ></div></div>
+
+                <div class="col-xs-12" id="preguntas">
+
+                    <div id="aparece" class="btn btn-primary btn-lg btn-block" onclick="Niveles()">HISTORIA</div>
+                    <div id="aparece" class="btn btn-success btn-lg btn-block" onclick="Niveles()">ECONOMIA</div>
+                    <div id="aparece" class="btn btn-danger btn-lg btn-block" onclick="Niveles()">FILOSOFIA</div>                        
+                    <div id="aparece" class="btn btn-warning btn-lg btn-block" onclick="Niveles()">LENGUA Y LITERATURA</div>
+                </div>
+
+            </div>
+
+
+
+            <div class="col-xs-2"></div>
         </div>
         
-        
+        </div>
         
     <script>
     $('#derecha').hide();
@@ -113,8 +166,14 @@ and open the template in the editor.
                                         
     }
                  
-    function paco() {
-    location.href = 'Preguntas.html';
+    function preguntas() {
+        
+    $('#progreso').raty({
+        readOnly    : true, 
+        score       : 0, 
+        number      : 10, 
+        halfShow    : true
+    });
 }        
             
             
