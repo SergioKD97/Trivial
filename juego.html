@@ -13,11 +13,12 @@ and open the template in the editor.
         <link href="js/jquery.raty.css" rel="stylesheet" type="text/css"/>
         <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+        <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
         
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/jquery.raty.js" type="text/javascript"></script>        
-        
+        <script src="js/preguntasSelectividad.js" type="text/javascript"></script>
         
         
         <style>
@@ -37,6 +38,9 @@ and open the template in the editor.
             .cambioColor:hover {color:blue;}
             #respuesta{background-color: }
             #preguntasDiv{background-color: antiquewhite;margin-top: 200px}
+            #r1,#r2,#r3,#r4{text-align:left; margin-left: 10px}
+            #enunciado{border-color: teal;text-align: left}
+            #numero{float: left;margin-right: -10px;clear: both}
             #separa{
                 display:block;
                 border-top:2px solid #000;
@@ -65,9 +69,10 @@ and open the template in the editor.
                 60% {background-color : #d4e6f1;}
                 80% {background-color : #d4efdf;}
                 100% {background-color : #d98880;}
-
-
             }
+
+            
+            
 
 </style>
  
@@ -87,11 +92,11 @@ and open the template in the editor.
             <div id="tema1" class="row">
                 <div class="col-xs-6" > 
 
-                    <div id="aparece" class="btn btn-primary btn-lg btn-block" onclick="Niveles()">HISTORIA</div>
-                    <div id="aparece" class="btn btn-success btn-lg btn-block" onclick="Niveles()">ECONOMIA</div>
-                    <div id="aparece" class="btn btn-danger btn-lg btn-block" onclick="Niveles()">FILOSOFIA</div>
-                    <div id="aparece" class="btn btn-warning btn-lg btn-block" onclick="Niveles()">LENGUA Y LITERATURA</div>
-                    <div id="aparece" class="btn btn-info btn-lg btn-block" onclick="Niveles()">INGLES</div>
+                    <div id="tema" class="btn btn-primary btn-lg btn-block" name="Historia" onclick="Niveles()">HISTORIA</div>
+                    <div id="tema" class="btn btn-success btn-lg btn-block" name="Economia" onclick="Niveles()">ECONOMIA</div>
+                    <div id="tema" class="btn btn-danger btn-lg btn-block" name="Filosofia" onclick="Niveles()">FILOSOFIA</div>
+                    <div id="tema" class="btn btn-warning btn-lg btn-block" name="Lengua" onclick="Niveles()">LENGUA Y LITERATURA</div>
+                    <div id="tema" class="btn btn-info btn-lg btn-block" name="Ingles" onclick="Niveles()">INGLES</div>
 
                     <br>
                 </div>
@@ -108,7 +113,7 @@ and open the template in the editor.
             </div>
                 
             <div class="col-xs-2"></div>
-            <div id="preguntasDiv"  class="row col-xs-9">
+            <div id="preguntasDiv"  class="row col-xs-10">
 
                 <div class="col-xs-12" id="progreso"  >
                     
@@ -122,12 +127,7 @@ and open the template in the editor.
 
                 <div class="col-xs-12" id="preguntas">
 
-                    <div id="" style="border-color: teal;text-align: left" class="btn btn-lg btn-block " onclick="">Uno de los siguientes gastos puede considerarse que no construye el Estado de bienestar:</div>
-                    <div style="width: 75%" id="respuesta" class="btn btn-lg btn-block " onclick=""><p class="cambioColor">1. El gasto en salud.  </p></div>
-                    <div style="width: 75%" id="respuesta" class="btn btn-lg btn-block " onclick=""><p class="cambioColor">2. El gasto en educación. </p></div>
-                    <div style="width: 75%" id="respuesta" class="btn btn-lg btn-block " onclick=""><p class="cambioColor">3. El gasto en infraestructuras públicas. </p></div>
-                    <div style="width: 75%" id="respuesta" class="btn btn-lg btn-block " onclick=""><p class="cambioColor">4. Los subsidios de desempleo.</p></div>
-                    <div>  </div>
+                    
                     
                 </div>
 
@@ -135,7 +135,6 @@ and open the template in the editor.
 
 
 
-            <div class="col-xs-1"></div>
         </div>
         
         </div>
@@ -146,21 +145,85 @@ and open the template in the editor.
     $('#name').hide();
     $('#preguntasDiv').hide();
     $('#atras').hide();
-    temas();
+    niveles();
+
     
-    function temas() {
-    
+    //aparecen los niveles 
+    function niveles() {
+        //pone todos los botones de niveles
         for (var i=1; i<10; i++){
-        $('#niveles').append('<div class="miniboton btn-group" style="margin-right: 5px;margin-top:5px"> <button style="font-size:20px" class="miniboton btn btn-large btn-primary" onclick="clickNiveles()"> '+i+'</button></div>');
-                if (i==3 || i==6) {
-                $('#niveles').append('<br>');
+        $('#niveles').append('<div class="miniboton btn-group" style="margin-right: 5px;margin-top:5px"> <button id="botonNivel'+i+'" style="font-size:25px" class="miniboton btn btn-large btn-primary " onclick="clickNiveles()"> '+i+'</button></div>');
+            //los pone de 3 en 3
+            if (i==3 || i==6) {
+              $('#niveles').append('<br>');
+            }
+            //pone candados del nivel 4 al 9
+            if(i>3){
+                for(var j=4;j<10;j++){
+                $('#botonNivel'+i+'').removeClass("btn-primary").addClass("fa fa-lock disabled").text("").removeAttr('onclick') ;
+                }
             }
         }        
         
     }  
+    //(`numero`, `nivel`, `tema`, `enunciado`, `r1`, `r2`, `r3`, `r4`, `correcta`)
+    
+    //cambia las preguntas y respuestas cada vez que se ejecute
+    function cambiaPreguntas() {
+        siguiente = Math.floor(Math.random() * preguntas.length);
+        
+        $('#preguntas').text('');
+        
+        //añade texto y atributos a la pregunta y respuestas
+        //$('#enunciado').text(preguntas[siguiente][3]).addClass("btn btn-lg btn-block");
+        //$('#botones').append('<button id="boton1" class="btn btn-warning" style="width:25%;">' + verbos[siguiente][0] + ' </button> ');
+        $('#preguntas').append('<div id="enunciado" class="btn btn-lg btn-block" style="width:100%;">' + preguntas[siguiente][3] + '</div>');
+        $('#preguntas').append('<div id="numero" class="col-xs-1 btn btn-lg">1.</div>').append('<div id="r1" class="btn btn-lg btn-block" onclick="comprueba(this.id)">' + preguntas[siguiente][4] + '</div>');
+        $('#preguntas').append('<div id="numero" class="col-xs-1 btn btn-lg">2.</div>').append('<div id="r2" class="btn btn-lg btn-block" onclick="comprueba(this.id)">' + preguntas[siguiente][5] + '</div>');
+        $('#preguntas').append('<div id="numero" class="col-xs-1 btn btn-lg">3.</div>').append('<div id="r3" class="btn btn-lg btn-block" onclick="comprueba(this.id)">' + preguntas[siguiente][6] + '</div>');
+        $('#preguntas').append('<div id="numero" class="col-xs-1 btn btn-lg">4.</div>').append('<div id="r4" class="btn btn-lg btn-block" onclick="comprueba(this.id)">' + preguntas[siguiente][7] + '</div>');
+
+    }
+    
+    
+        //al hacer click mostrara si es correcta o incorrecta
+   
+    function comprueba(e) {        
+        var respuestaElegida = document.getElementById(e).innerHTML;        
+        var numeroRespuestaCorrecta = parseInt(preguntas[siguiente][8]);
+        var respuestaCorrecta = preguntas[siguiente][numeroRespuestaCorrecta + 3];
+        parseFloat(e);
+        if(respuestaElegida === respuestaCorrecta ){
+            $('#r1,#r2,#r3,#r4').removeAttr('onclick');
+            $('#'+ e+'').fadeOut(0).fadeIn(4000).addClass("btn-success");
+            setTimeout(cambiaPreguntas,5000);
+            
+        }else{
+            $('#'+ e+'').addClass("btn-danger active");
+            
+        }
+
+        
+        
+}
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //muestra niveles
     function Niveles() {
         $('#derecha').show();
         $('#name').fadeIn(1000).show();
@@ -168,13 +231,20 @@ and open the template in the editor.
              
     }
     
+    
+    //muestra las preguntas y respuestas
     function clickNiveles() {
         $('#tema1').hide();
         $('#cabecera').hide();
         $('#tema1').hide();
         $('#preguntasDiv').fadeIn(1000).show();
         $('#atras').fadeIn(1000).show();
+        
+        cambiaPreguntas();
+        
     }
+    
+    //vuelve a los temas
     function clickLogo() {
         $('#tema1').show();
         $('#cabecera').show();
