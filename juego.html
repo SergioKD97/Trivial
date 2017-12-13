@@ -31,9 +31,10 @@ and open the template in the editor.
             .miniboton{width: 60px;min-width: 60px;height: 60px;min-height: 60px;}
             #niveles{ }
             #name{margin-bottom: 10px}
-            #progreso{}
+            #progreso{margin-top: 10px}
             #corazones{float: right;}
-            #puntuacion{float: left;}
+            #puntuacion{float: left;font-size: 30px;font-family: serif;padding: 10px 16px;border-radius: 15px;color: darkblue;background-image: linear-gradient(#ded, #ccd);}
+            #medio{float: left;font-size: 30px;margin-left: 6%;animation: BackgroundGradient 3s infinite alternate; font-family: monospace;}
             .cambioColor{text-align: left}
             .cambioColor:hover {color:blue;}
             #respuesta{background-color: }
@@ -58,7 +59,7 @@ and open the template in the editor.
             
             
             
-            #preguntas{margin-top: 20px }
+            #preguntas{margin-top: 30px;margin-bottom: 20px }
             body {
             animation: BackgroundGradient 30s infinite alternate;
             }    
@@ -111,15 +112,16 @@ and open the template in the editor.
                 </div>
             </div>
                 
-            <div class="col-xs-2"></div>
-            <div id="preguntasDiv"  class="row col-xs-10">
+            <div class="col-xs-2 col-lg-0 col-md-2"></div>
+            <div id="preguntasDiv"  class="row col-xs-10 col-lg-12 col-md-10">
 
-                <div class="col-xs-12" id="progreso"  >
+                <div class="col-xs-12" id="progreso">
                     
-                    <div> <div id="puntuacion" class="btn btn-primary btn-lg " onclick="Niveles()">PUNTUACION</div></div>
-                    <div><div id="corazones" class="btn btn-success btn-lg " onclick="Niveles()"></div></div>
-
-
+                    <div id="puntuacion" class="" onclick="Niveles()">PUNTUACION : 0</div>
+                    <div id="medio" class="btn btn-default btn-lg"> NIVEL DESBLOQUEADO <i class="fa fa-angellist" style="float: left"></i><i class="fa fa-thumbs-up" style="float: left;margin-right: 10px"></i><i class="fa fa-thumbs-up"></i><i class="fa fa-angellist"></i></div>
+                    <div id="corazones" class="btn btn-success btn-lg " onclick="Niveles()"></div>
+                    
+                    
                     
                 </div>
 
@@ -158,20 +160,41 @@ and open the template in the editor.
     var desbloqueaNivelesLengua = 0;
     var desbloqueaNivelesIngles = 0;
     
+    var puntuación = 0;
+    
     
     //aparecen los niveles 
     function niveles(){
+        //resetea las estrellas al volver a entrar en las preguntas
         $('#niveles').text('');
-        //pone todos los botones de niveles
+        
+        //para resetear las estrellas si cambio de nivel
+        aumenta = 0;
+        
+        
+        //pone todos los botones de niveles 
         for (var i=1; i<10; i++){
         $('#niveles').append('<div class="miniboton btn-group" style="margin-right: 5px;margin-top:5px"> <button id="'+paco+i+'" style="font-size:25px" class="miniboton btn btn-large btn-primary" onclick="clickNiveles()"> '+i+'</button></div>');
-            //los pone de 3 en 3
+            
+            if("Historia" === paco){
+               $('#'+paco+''+i+'').addClass("miniboton btn btn-large btn-primary");
+            }else if ("Economia" === paco) {
+               $('#'+paco+''+i+'').addClass("miniboton btn btn-large btn-success");
+            }else if ("Filosofia" === paco) {
+               $('#'+paco+''+i+'').addClass("miniboton btn btn-large btn-danger");
+            }else if ("Lengua" === paco) {
+               $('#'+paco+''+i+'').addClass("miniboton btn btn-large btn-warning");
+            }else if ("Ingles" === paco) {
+               $('#'+paco+''+i+'').addClass("miniboton btn btn-large btn-info");
+            }            
+            
+            
             if (i==3 || i==6) {
               $('#niveles').append('<br>');
             }
             //pone candados del nivel 4 al 9
             if(i>3){
-                $('#'+paco+''+i+'').removeClass("btn-primary").addClass("fa fa-lock disabled").text("").removeAttr('onclick') ;
+                $('#'+paco+''+i+'').removeClass().addClass("miniboton btn btn-large fa fa-lock disabled").text("").removeAttr('onclick') ;
             }
         }
         
@@ -182,7 +205,7 @@ and open the template in the editor.
             var suma = 3+1;
 
             for (var i=0; i<desbloqueaNivelesHistoria; i++){
-            $('#'+'Historia'+''+suma+'').addClass("btn-primary").removeClass("fa fa-lock disabled").text(suma).attr('onclick','clickNiveles()') ;                
+            $('#'+'Historia'+''+suma+'').removeClass("miniboton btn btn-large fa fa-lock disabled").addClass("miniboton btn btn-large btn-primary").text(suma).attr('onclick','clickNiveles()') ;                
             suma++;
             }
         }
@@ -192,7 +215,7 @@ and open the template in the editor.
             var suma = 3+1;
 
             for (var i=0; i<desbloqueaNivelesEconomia; i++){
-            $('#'+'Economia'+''+suma+'').addClass("btn-primary").removeClass("fa fa-lock disabled").text(suma).attr('onclick','clickNiveles()') ;                
+            $('#'+'Economia'+''+suma+'').removeClass("miniboton btn btn-large fa fa-lock disabled").addClass("miniboton btn btn-large btn-success").text(suma).attr('onclick','clickNiveles()') ;                
             suma++;
             }
 
@@ -203,7 +226,7 @@ and open the template in the editor.
             var suma = 3+1;
 
             for (var i=0; i<desbloqueaNivelesFilosofia; i++){
-            $('#'+'Filosofia'+''+suma+'').addClass("btn-primary").removeClass("fa fa-lock disabled").text(suma).attr('onclick','clickNiveles()') ;                
+            $('#'+'Filosofia'+''+suma+'').removeClass("miniboton btn btn-large fa fa-lock disabled").addClass("miniboton btn btn-large btn-danger").text(suma).attr('onclick','clickNiveles()') ;                
             suma++;
             }
 
@@ -214,7 +237,7 @@ and open the template in the editor.
             var suma = 3+1;
 
             for (var i=0; i<desbloqueaNivelesLengua; i++){
-            $('#'+'Lengua'+''+suma+'').addClass("btn-primary").removeClass("fa fa-lock disabled").text(suma).attr('onclick','clickNiveles()') ;                
+            $('#'+'Lengua'+''+suma+'').removeClass("miniboton btn btn-large fa fa-lock disabled").addClass("miniboton btn btn-large btn-warning").text(suma).attr('onclick','clickNiveles()') ;                
             suma++;
             }
 
@@ -224,16 +247,11 @@ and open the template in the editor.
             var suma = 3+1;
 
             for (var i=0; i<desbloqueaNivelesIngles; i++){
-            $('#'+'Ingles'+''+suma+'').addClass("btn-primary").removeClass("fa fa-lock disabled").text(suma).attr('onclick','clickNiveles()') ;                
+            $('#'+'Ingles'+''+suma+'').removeClass("miniboton btn btn-large fa fa-lock disabled").addClass("miniboton btn btn-large btn-info").text(suma).attr('onclick','clickNiveles()') ;                
             suma++;
             }
 
         }
-        
-        
-        
-        
-        
         
         
         
@@ -273,14 +291,18 @@ and open the template in the editor.
     
     //al hacer click mostrara si es correcta o incorrecta
     function comprueba(e) {        
-        var respuestaElegida = document.getElementById(e).innerHTML;        
+        var respuestaElegida = document.getElementById(e).innerHTML;      
+        console.log(respuestaElegida);
         var numeroRespuestaCorrecta = parseInt(preguntasBuena[siguiente][8]);
         var respuestaCorrecta = preguntasBuena[siguiente][numeroRespuestaCorrecta + 3];
         parseFloat(e);
         
         //si es correcta la respuesta, cambia a la siguiente
         if(respuestaElegida === respuestaCorrecta ){
+            //pone estrella cada vez que acertemos
             aumenta = aumenta + 1;
+            
+            
             
             $('#corazones').raty({
             readOnly    : true,
@@ -289,10 +311,21 @@ and open the template in the editor.
             number      : 5,
             starType    : 'i'
             });
+            //muestra div y suma 50 de puntuacion
+            if(aumenta === 5){
+               $('#medio').attr('onclick','nivelDesbloqueado()').show();
+               puntuación = puntuación + 40;
+            }
+            //si acertamos una suma 10 puntos
+            puntuación = puntuación + 10;
+            $('#puntuacion').text("PUNTUACION : "+puntuación);
+            
+            
             
             //cada vez que acertamos 5 preguntas de cada tema se van a ir desbloqueando niveles de cada tema
             if( aumenta === 5 && paco === "Historia" ){
                 desbloqueaNivelesHistoria++;
+                
             }
             if( aumenta === 5 && paco === "Economia" ){
                 desbloqueaNivelesEconomia++;
@@ -306,10 +339,10 @@ and open the template in the editor.
             }            
             if( aumenta === 5 && paco === "Ingles" ){
                 desbloqueaNivelesIngles++;
-            }            
-
-
-            //PONER IF PARA QUE CUANDO LLEGUE A 5 ESTRELLAS LE APAREWZCA MENSAJE Y LE DEVUELVA A LOL TEMAS CON EL NIVEL DESBLOQUEADO
+            }     
+            
+            
+            
             
             
             
@@ -319,6 +352,8 @@ and open the template in the editor.
             setTimeout(cambiaPreguntas,2500);
             
         }else{
+            puntuación = puntuación - 10;
+            
             //pone en rojo las incorrectas
             $('#'+ e+'').addClass("btn-danger active");
             aumenta = 0;
@@ -337,7 +372,12 @@ and open the template in the editor.
     
     
     
-    
+    //muestra nivel desbloqueado
+    function nivelDesbloqueado(){
+        setTimeout(clickLogo(),3000);
+        setTimeout(Niveles(paco),3500);
+        
+    }
     
     
     //muestra niveles
@@ -365,6 +405,8 @@ and open the template in the editor.
         $('#tema1').hide();
         $('#preguntasDiv').fadeIn(1000).show();
         $('#atras').fadeIn(1000).show();
+        $('#medio').hide();
+        
         
         $('#corazones').raty({
             readOnly    : true,
@@ -385,23 +427,13 @@ and open the template in the editor.
         $('#derecha').fadeIn(1000).hide();
         $('#preguntasDiv').fadeIn(1000).hide();
         $('#atras').fadeIn(1000).hide();}
+    
+             
                  
-                 
-                 
-                 
-    function pregunta() {
-        
-    $('#progreso').raty({
-        readOnly    : true, 
-        score       : 0, 
-        number      : 10, 
-        halfShow    : true
-    });
-}        
             
             
             
         </script>
-        
+            
     </body>
 </html>
